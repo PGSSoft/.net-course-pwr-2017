@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/site.css">
+    <!--Ikonki font awesome-->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <header class="row">
+            <h1 class="col-md-3 col-md-offset-1">NazwaTablicy</h1>
+        </header>
+        <main class="row">
+            <div class="col-md-12">
+                <div class="board">
+                    <!--LIST-->
+                    <section class="list">
+                        <header class="list__header clearfix">
+                            <h4 class="pull-left">NazwaKolumny</h4>
+                            <i class="fa fa-trash-o trash pull-right list__remove-list-btn"></i>
+                        </header>
+                        <div class="list__cards-container ui-sortable">
+                            <!--card-->
+                            <div class="card">
+                                <div class="card__header clearfix">
+                                    <h5 class="pull-left">NazwaKarty</h5>
+                                    <i class="fa fa-trash-o trash pull-right card__remove-card-btn"></i>
+                                </div>
+                                <div class="card__body">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card__header clearfix">
+                                    <h5 class="pull-left">NazwaKarty</h5>
+                                    <i class="fa fa-trash-o trash pull-right card__remove-card-btn"></i>
+                                </div>
+                                <div class="card__body">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card__header clearfix">
+                                    <h5 class="pull-left">NazwaKarty</h5>
+                                    <i class="fa fa-trash-o trash pull-right card__remove-card-btn"></i>
+                                </div>
+                                <div class="card__body">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit
+                                </div>
+                            </div>
+                            <!--card-->
+                        </div>
+                        <!--cardForm-->
+                        <div class="list__add-card-btn ">
+                            <button class="btn btn-success pull-right">Dodaj kartę</button>
+                        </div>
+                        <div class="card card--editor clearfix element--is-hidden">
+                            <!-- element--is-hidden-->
+                                <div class="form-group card__header">
+                                    <input type="text" class="form-control" placeholder="Nazwa">
+                                </div>
+                                <div class="form-group card__body">
+                                    <textarea class="form-control" rows="3" placeholder="Opis"></textarea>
+                                </div>
+                                <div>
+                                    <input type="submit" value="Dodaj" class="btn btn-primary pull-right" />
+                                </div>
+                        </div>
+                        <!--cardForm-->
+                    </section>
+                    <!--LIST-->
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

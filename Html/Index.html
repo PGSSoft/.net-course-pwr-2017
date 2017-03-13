@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/site.css">
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <div class="container">
+        <header class="row">
+            <h2 class="col-md-6">Twoje Tablice</h2>
+        </header>
+        <main class="row">
+            <section class="col-md-6">
+                <div class="row">
+                    <h3 class="col-md-12">Wybierz tablice:</h3>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <!--Dropdown-->
+                        <button class="btn btn-primary dropdown-toggle form-control" type="button" data-toggle="dropdown">Dropdown Example
+                        </button>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="submit" class="btn btn-primary" value="Przejdz" />
+                    </div>
+                </div>
+            </section>
+            <section class="col-md-6">
+                <!--FORMA-->
+                <form>
+                    <div class="container-fluid card--white">
+                        <div class="row">
+                            <h3 class="col-md-12">Dodaj nową tablicę:</h3>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 form-group">
+                                <label for="name">Nazwa tablicy:</label>
+                                <input type="text" class="form-control" id="name" placeholder="Nazwa">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 form-group">
+                                <label for="description">Opis:</label>
+                                <textarea type="text" class="form-control" id="description" placeholder="Opis"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="submit" class="btn btn-primary" value="Dodaj!" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!--FORMA-->
+            </section>
+        </main>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+</body>
+
+</html>
