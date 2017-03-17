@@ -1,0 +1,46 @@
+﻿@model PGSBoard.Models.Board
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <title>CreateBoard</title>
+</head>
+<body>
+    <!--FORMA-->
+<div class="container-fluid card--white">
+    @using (Html.BeginForm("CreateBoard","Board", FormMethod.Post))
+    {
+        <div class="row">
+            <h3 class="col-md-12">Dodaj nową tablicę:</h3>
+        </div>
+        <div class="row">
+            <div class="col-md-12 form-group">
+                @Html.LabelFor(m => m.Name)
+                @Html.TextBoxFor(m => m.Name, 
+               new {@class = "form-control"})
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 form-group">
+               @Html.LabelFor(m => m.Description)
+                @Html.TextAreaFor(m => m.Description,
+               new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="submit" class="btn btn-primary" value="Dodaj!" />
+            </div>
+        </div>
+    }
+</div>
+    <!--FORMA-->
+</body>
+</html>

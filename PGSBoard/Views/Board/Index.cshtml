@@ -1,0 +1,43 @@
+﻿@model PGSBoard.Controllers.GetBoardsViewModel
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <div class="container">
+        <header class="row">
+            <h2 class="col-md-6">Twoje Tablice</h2>
+        </header>
+        <main class="row">
+            <section class="col-md-6">
+                <div class="row">
+                    <h3 class="col-md-12">Wybierz tablice:</h3>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(m => m.SelectedBoardId, Model.BoardsItems, 
+                       new { @class = "form-control"})
+                    </div>
+                    <div class="col-md-2">
+                        <input type="submit" class="btn btn-primary" value="Przejdz" />
+                    </div>
+                </div>
+            </section>
+            <section class="col-md-6">
+                @Html.ActionLink("Create Board", 
+               "CreateBoard", "Board", null,
+               new { @class = "btn btn-primary"})
+            </section>
+        </main>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+</body>
+
+</html>
