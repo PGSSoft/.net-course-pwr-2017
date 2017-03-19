@@ -11,7 +11,7 @@ namespace PGSBoard.Controllers
     {
         public static GetBoardsViewModel GetBoardsViewModel { get; set; }
         
-        // static controller because we don't want to create GetBoardsViewModel on each request
+        // static constructor because we don't want to create GetBoardsViewModel on each request
         static BoardController()
         {
             GetBoardsViewModel = 
