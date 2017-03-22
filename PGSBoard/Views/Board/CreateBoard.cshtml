@@ -1,4 +1,4 @@
-﻿@model PGSBoard.Models.Board
+﻿@model PGSBoard.ViewModels.CreateBoardViewModel
 
 @{
     Layout = null;
@@ -14,7 +14,7 @@
 </head>
 <body>
     <!--FORMA-->
-<div class="container-fluid card--white">
+<div class="container card--white">
     @using (Html.BeginForm("CreateBoard","Board", FormMethod.Post))
     {
         <div class="row">
@@ -22,16 +22,18 @@
         </div>
         <div class="row">
             <div class="col-md-12 form-group">
-                @Html.LabelFor(m => m.Name)
-                @Html.TextBoxFor(m => m.Name, 
+                @Html.LabelFor(m => m.CreateBoardFormDto.Name)
+                @Html.TextBoxFor(m => m.CreateBoardFormDto.Name, 
                new {@class = "form-control"})
+               @Html.ValidationMessageFor(m => m.CreateBoardFormDto.Name)
             </div>
         </div>
         <div class="row">
             <div class="col-md-12 form-group">
-               @Html.LabelFor(m => m.Description)
-                @Html.TextAreaFor(m => m.Description,
+               @Html.LabelFor(m => m.CreateBoardFormDto.Description)
+                @Html.TextAreaFor(m => m.CreateBoardFormDto.Description,
                new { @class = "form-control" })
+               @Html.ValidationMessageFor(m => m.CreateBoardFormDto.Description)
             </div>
         </div>
         <div class="row">
