@@ -19,15 +19,19 @@
                 <div class="row">
                     <h3 class="col-md-12">Wybierz tablice:</h3>
                 </div>
-                <div class="row">
-                    <div class="col-md-10">
-                        @Html.DropDownListFor(m => m.SelectedBoardId, Model.BoardsItems, 
-                       new { @class = "form-control"})
+                @using (Html.BeginForm("Show", "Board", FormMethod.Get))// For possiblity tp redirect user to board he chosen 
+                                                                         // I've created form,which on submit sends GET request with id of chosen board
+                {
+                    <div class="row">
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(m => m.SelectedBoardId, Model.BoardsItems,
+                                new {@class = "form-control"})
+                        </div>
+                        <div class="col-md-2">
+                            <input type="submit" class="btn btn-primary" value="Przejdz"/>
+                        </div>
                     </div>
-                    <div class="col-md-2">
-                        <input type="submit" class="btn btn-primary" value="Przejdz" />
-                    </div>
-                </div>
+                }
             </section>
             <section class="col-md-6">
                 @Html.ActionLink("Create Board", 

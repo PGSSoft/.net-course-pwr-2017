@@ -123,14 +123,21 @@
     <Compile Include="Controllers\BoardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Dtos\CreateBoardFormDto.cs" />
+    <Compile Include="Dtos\CreateCardDto.cs" />
+    <Compile Include="Dtos\CreateListDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Board.cs" />
+    <Compile Include="Models\Card.cs" />
+    <Compile Include="Models\List.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BoardsService.cs" />
+    <Compile Include="ViewModels\CardViewModel.cs" />
     <Compile Include="ViewModels\CreateBoardViewModel.cs" />
     <Compile Include="ViewModels\GetBoardsViewModel.cs" />
+    <Compile Include="ViewModels\ListViewModel.cs" />
+    <Compile Include="ViewModels\ShowBoardViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -156,9 +163,11 @@
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -169,6 +178,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Board\Index.cshtml" />
     <Content Include="Views\Board\CreateBoard.cshtml" />
+    <None Include="Views\Board\Show.cshtml" />
+    <Content Include="Views\Board\_CreateListForm.cshtml" />
+    <Content Include="Views\Board\_CreateCardForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

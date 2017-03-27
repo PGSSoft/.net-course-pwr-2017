@@ -1,0 +1,16 @@
+﻿@model PGSBoard.Dtos.CreateListDto
+
+@*This partial will be injected to show boards view and it is form for creating new list*@
+
+<section class="list">
+    @using (Html.BeginForm("CreateList", "Board", FormMethod.Post))
+    {
+        @Html.HiddenFor(m => m.BoardId)
+        <div class="form-group">
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        </div>
+        <div>
+            <input type="submit" class="btn btn-success" value="Dodaj listę"/>
+        </div>
+    }
+</section>

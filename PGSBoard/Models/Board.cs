@@ -9,6 +9,12 @@ namespace PGSBoard.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; } 
+        public string Description { get; set; }
+        public List<List> Lists { get; set; }
+
+        public Board()
+        {
+            Lists = new List<List>();
+        }
     }
 }

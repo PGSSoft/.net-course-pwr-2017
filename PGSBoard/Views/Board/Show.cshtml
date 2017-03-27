@@ -1,0 +1,55 @@
+﻿@model PGSBoard.ViewModels.ShowBoardViewModel
+
+@{
+    ViewBag.Title = "title";
+
+}
+
+@*This is new view, this view is showing a board which user has chosen. This will be most important view in app.
+    I've add it here because we didn't had time to create it last time.*@
+
+<div class="container-fluid">
+    <header class="row">
+        <h1 class="col-md-3 col-md-offset-1">@Model.Name</h1> @*Show board name*@
+    </header>
+    <main class="row">
+        <div class="col-md-12">
+            <div class="board">
+                <!--LIST-->
+                @foreach (var list in Model.Lists)  //Iterate all lists in board and display it
+                {
+                    <section class="list">
+                        <header class="list__header clearfix">
+                            <h4 class="pull-left">@list.Name</h4> @*Display list name*@
+                            <i class="fa fa-trash-o trash pull-right list__remove-list-btn"></i>
+                        </header>
+                        <div class="list__cards-container ui-sortable">
+                            @foreach (var card in list.Cards) //Iterate all cards in list
+                            {
+                                <!--card-->
+                                <div class="card">
+                                    <div class="card__header clearfix">
+                                        <h5 class="pull-left">@card.Name</h5> @*Display card name*@
+                                        <i class="fa fa-trash-o trash pull-right card__remove-card-btn"></i>
+                                    </div>
+                                    <div class="card__body">
+                                        @card.Description @*Display card description*@
+                                    </div>
+                                </div> 
+                            }
+                            <!--card-->
+                        </div>
+                        <!--cardForm-->
+                        @Html.Partial("_CreateCardForm", list.CreateCardDto) @*As last card display form to creating card, we didn't talk about
+                                                                                 partials - but it's simple way to paste html code form other file
+                                                                                 Whats more we can pass there it's own model. In this case it is createCardDto*@
+                        <!--cardForm-->
+                    </section>
+                }
+                <!--LIST-->
+                @Html.Partial("_CreateListForm", Model.CreateListDto) @*Like in cards as last list we display form for creating list, it works in the same way
+                                                                          as adding carD. There is used partial to injiect html code*@
+            </div>
+        </div>
+    </main>
+</div>

@@ -1,0 +1,20 @@
+﻿@model PGSBoard.Dtos.CreateCardDto
+
+@*This partial will be injected to show boards view and it is form for creating new card*@
+
+<div class="card card--editor clearfix">
+    @using (Html.BeginForm("CreateCard", "Board", FormMethod.Post))
+    {
+        @Html.HiddenFor(m => m.ListId) @*In hidden html field we put id of list to which card will be added, during creating this dto,
+                                           we put there id of list and now we can pass it to server again*@
+        <div class="form-group card__header">
+            @Html.TextBoxFor(m => m.Name, new {@class = "form-control"})
+        </div>
+        <div class="form-group card__body">
+            @Html.TextAreaFor(m => m.Description, new {@class = "form-control"})
+        </div>
+        <div>
+            <input type="submit" value="Dodaj" class="btn btn-primary pull-right"/>
+        </div>
+    }
+</div>
