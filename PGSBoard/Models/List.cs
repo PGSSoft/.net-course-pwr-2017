@@ -1,16 +1,24 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace PGSBoard.Models
 {
     public class List
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public List<Card> Cards { get; set; }
-
         public List()
         {
-            Cards = new List<Card>();
+            Cards = new HashSet<Card>();
         }
+
+        [Key]
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public Board Board { get; set; }
+
+        public int BoardId { get; set; }
+
+        public virtual ICollection<Card> Cards { get; private set; }
     }
 }
