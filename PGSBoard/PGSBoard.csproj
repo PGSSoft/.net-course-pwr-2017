@@ -136,6 +136,7 @@
     <Compile Include="Dtos\CreateBoardFormDto.cs" />
     <Compile Include="Dtos\CreateCardDto.cs" />
     <Compile Include="Dtos\CreateListDto.cs" />
+    <Compile Include="Dtos\DeleteCardDto.cs" />
     <Compile Include="Dtos\ListDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

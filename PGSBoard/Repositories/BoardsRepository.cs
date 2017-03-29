@@ -114,5 +114,16 @@ namespace PGSBoard.Repositories
                 db.SaveChanges();
             }
         }
+
+
+        public int DeleteCard(DeleteCardDto dto)
+        {
+            using (var db = new PGSBoardContext())
+            {
+                var cardToRemove = db.Cards.Single(card => card.Id == dto.CardId);
+                db.Cards.Remove(cardToRemove);
+                return db.SaveChanges() == 1 ? dto.CardId : 0;
+            }
+        }
     }
 }
