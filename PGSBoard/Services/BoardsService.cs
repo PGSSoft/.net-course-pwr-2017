@@ -56,7 +56,7 @@
             List<CardViewModel> cardsViewModels = new List<CardViewModel>();
             foreach (var card in cards)
             {
-                cardsViewModels.Add(new CardViewModel(card.Name, card.Description));
+                cardsViewModels.Add(new CardViewModel(card.Id, card.Name, card.Description));
             }
             return cardsViewModels;
         }

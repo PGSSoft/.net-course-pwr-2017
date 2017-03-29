@@ -73,6 +73,7 @@ namespace PGSBoard.Repositories
                         Name = l.Name,
                         Cards = l.Cards.Select(c => new CardDto
                         {
+                            Id = c.Id,
                             Name = c.Name,
                             Description = c.Description
                         })
