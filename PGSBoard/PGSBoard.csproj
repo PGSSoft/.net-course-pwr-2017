@@ -131,9 +131,12 @@
     <Compile Include="Controllers\BoardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DBContexts\PGSBoardContext.cs" />
+    <Compile Include="Dtos\BoardDto.cs" />
+    <Compile Include="Dtos\CardDto.cs" />
     <Compile Include="Dtos\CreateBoardFormDto.cs" />
     <Compile Include="Dtos\CreateCardDto.cs" />
     <Compile Include="Dtos\CreateListDto.cs" />
+    <Compile Include="Dtos\ListDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -150,7 +153,7 @@
     <Compile Include="Services\BoardsService.cs" />
     <Compile Include="ViewModels\CardViewModel.cs" />
     <Compile Include="ViewModels\CreateBoardViewModel.cs" />
-    <Compile Include="ViewModels\GetBoardsViewModel.cs" />
+    <Compile Include="ViewModels\BoardsViewModel.cs" />
     <Compile Include="ViewModels\ListViewModel.cs" />
     <Compile Include="ViewModels\ShowBoardViewModel.cs" />
   </ItemGroup>

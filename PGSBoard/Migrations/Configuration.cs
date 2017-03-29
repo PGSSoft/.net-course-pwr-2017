@@ -1,12 +1,9 @@
 namespace PGSBoard.Migrations
 {
     using Models;
-    using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<PGSBoard.DBContexts.PGSBoardContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<DBContexts.PGSBoardContext>
     {
         public Configuration()
         {
@@ -15,7 +12,7 @@ namespace PGSBoard.Migrations
             ContextKey = "PGSBoard.DBContexts.PGSBoardContext";
         }
 
-        protected override void Seed(PGSBoard.DBContexts.PGSBoardContext context)
+        protected override void Seed(DBContexts.PGSBoardContext context)
         {
             context.Boards.AddOrUpdate(
               b => b.Name,

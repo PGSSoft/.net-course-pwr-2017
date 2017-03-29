@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Net.Http.Headers;
     using PGSBoard.Dtos;
     using PGSBoard.Models;
     using PGSBoard.ViewModels;
@@ -10,18 +9,18 @@
 
     public class BoardsService
     {
-        private BoardsRepository repo;
+        private readonly BoardsRepository boardsRepository;
 
         public BoardsService()
         {
-            this.repo = new BoardsRepository();
+            this.boardsRepository = new BoardsRepository();
         }
 
-        //This method creates new GetBoardsViewModel which contains all boards
-        public GetBoardsViewModel GetGetBoardsViewModel()
+        //This method creates new BoardsViewModel which contains all boards
+        public BoardsViewModel GetBoardsViewModel()
         {
-            var boards = this.repo.GetBoards();
-            var viewModel = new GetBoardsViewModel(boards);
+            var boards = this.boardsRepository.GetBoards();
+            var viewModel = new BoardsViewModel(boards);
             return viewModel;
         }
 
@@ -29,22 +28,22 @@
         public CreateBoardViewModel GetCreateBoardViewModel()
         {
             var viewModel = new CreateBoardViewModel()
-                                {
-                                    CreateBoardFormDto = new CreateBoardFormDto()
-                                };
+            {
+                CreateBoardFormDto = new CreateBoardFormDto()
+            };
             return viewModel;
         }
 
         //Method for creating new board
         public void CreateBoard(CreateBoardFormDto dto)
         {
-            this.repo.AddBoard(dto);
+            this.boardsRepository.AddBoard(dto);
         }
 
         //This method search for board with specified id and creates ShowBoardViewModel
         public ShowBoardViewModel GetShowBoardViewModel(int boardId)
         {
-            var board = this.repo.GetBoard(boardId);
+            var board = this.boardsRepository.GetBoard(boardId);
 
             var viewModel = new ShowBoardViewModel(board.Name,      //Create viewmodel for Board
                 MapListsToListViewModels(board.Lists.ToList()),      //Map all lists which board contains into ListViewModel
@@ -52,7 +51,7 @@
             return viewModel;
         }
 
-        private List<CardViewModel> MapCardsToCardViewModels(List<Card> cards)  //This method maps cards to CardViewModels
+        private List<CardViewModel> MapCardsToCardViewModels(List<CardDto> cards)  //This method maps cards to CardViewModels
         {
             List<CardViewModel> cardsViewModels = new List<CardViewModel>();
             foreach (var card in cards)
@@ -62,9 +61,9 @@
             return cardsViewModels;
         }
 
-        private List<ListViewModel> MapListsToListViewModels(List<List> lists)  //This method maps lists to ListViewModels
+        private List<ListViewModel> MapListsToListViewModels(List<ListDto> lists)  //This method maps lists to ListViewModels
         {
-            List<ListViewModel> listViewModels = new List<ListViewModel>();
+            var listViewModels = new List<ListViewModel>();
             foreach (var list in lists)
             {
                 listViewModels.Add(new ListViewModel(list.Name, MapCardsToCardViewModels(list.Cards.ToList()),  //Map cards which belongs to list to CardViewModels
@@ -76,15 +75,16 @@
         //Method for creating new list
         public void CreateList(CreateListDto dto)
         {
-            this.repo.AddList(dto);
+            this.boardsRepository.AddList(dto);
         }
 
         //Method for creatin new list
         public int CreateCart(CreateCardDto dto)
         {
-            this.repo.AddCard(dto);
+            this.boardsRepository.AddCard(dto);
 
-            var board = this.repo.GetBoards().Single(x => x.Lists.Select(l => l.Id).Contains(dto.ListId));
+            var boards = this.boardsRepository.GetBoards();
+            var board = boards.Single(x => x.Lists.Select(l => l.Id).Contains(dto.ListId));
             return board.Id;
         }
     }

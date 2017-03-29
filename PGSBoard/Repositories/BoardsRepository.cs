@@ -1,25 +1,40 @@
 ﻿using PGSBoard.DBContexts;
 using PGSBoard.Models;
-using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using PGSBoard.Dtos;
-using System.Diagnostics;
 
 namespace PGSBoard.Repositories
 {
     public class BoardsRepository
     {
-        public List<Board> GetBoards()
+        public IEnumerable<BoardDto> GetBoards()
         {
             using(var db = new PGSBoardContext())
             {
                 var boards = db.Boards
-                    .Include(b => b.Lists.Select(l => l.Cards))
+                    .Include("Lists.Cards")
                     .ToList();
 
-                return boards;
+                // dto mapping
+                var boardsDto = boards.Select(b => new BoardDto
+                {
+                    Id = b.Id,
+                    Name = b.Name,
+                    Description = b.Description,
+                    Lists = b.Lists.Select(l => new ListDto
+                    {
+                        Id = l.Id,
+                        Name = l.Name,
+                        Cards = l.Cards.Select(c => new CardDto
+                        {
+                            Name = c.Name,
+                            Description = c.Description
+                        })
+                    })
+                });
+
+                return boardsDto;
             }
         }
 
@@ -38,7 +53,7 @@ namespace PGSBoard.Repositories
             }
         }
 
-        public Board GetBoard(int boardId)
+        public BoardDto GetBoard(int boardId)
         {
             using(var db = new PGSBoardContext())
             {
@@ -46,7 +61,25 @@ namespace PGSBoard.Repositories
                     .Include("Lists.Cards")
                     .Single(b => b.Id == boardId);
 
-                return board;
+                // dto mapping
+                var boardDto = new BoardDto
+                {
+                    Id = board.Id,
+                    Name = board.Name,
+                    Description = board.Description,
+                    Lists = board.Lists.Select(l => new ListDto
+                    {
+                        Id = l.Id,
+                        Name = l.Name,
+                        Cards = l.Cards.Select(c => new CardDto
+                        {
+                            Name = c.Name,
+                            Description = c.Description
+                        })
+                    })
+                };
+
+                return boardDto;
             }
         }
 
@@ -76,8 +109,7 @@ namespace PGSBoard.Repositories
 
             using (var db = new PGSBoardContext())
             {
-                var newCard = db.Cards
-                    .Add(card);
+                db.Cards.Add(card);
                 db.SaveChanges();
             }
         }

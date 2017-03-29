@@ -1,17 +1,13 @@
-﻿using System.Collections.Generic;
-
-namespace PGSBoard.Controllers
+﻿namespace PGSBoard.Controllers
 {
     using System.Web.Mvc;
 
     using PGSBoard.Dtos;
-    using PGSBoard.Models;
     using PGSBoard.Services;
-    using PGSBoard.ViewModels;
 
     public class BoardController : Controller
     {
-        private BoardsService _boardsService;   
+        private readonly BoardsService _boardsService;   
 
         public BoardController()
         {
@@ -43,10 +39,10 @@ namespace PGSBoard.Controllers
             return View(viewModel);   //Show Create board view again
         }
 
-        // GET: return the main view of our app with GetBoardsViewModel 
+        // GET: return the main view of our app with BoardsViewModel 
         public ActionResult Index()
         {
-            var viewModel = _boardsService.GetGetBoardsViewModel();
+            var viewModel = _boardsService.GetBoardsViewModel();
             return View(viewModel);
         }
 
