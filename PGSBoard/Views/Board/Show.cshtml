@@ -30,7 +30,7 @@
                                 <div class="card">
                                     <div class="card__header clearfix">
                                         <h5 class="pull-left">@card.Name</h5> @*Display card name*@
-                                        <i class="fa fa-trash-o trash pull-right card__remove-card-btn"></i>
+                                        <i class="fa fa-trash-o trash pull-right card__remove-card-btn" data-card-id="@card.Id"></i>
                                     </div>
                                     <div class="card__body">
                                         @card.Description @*Display card description*@
@@ -52,5 +52,7 @@
             </div>
         </div>
     </main>
-    @Scripts.Render("~/bundles/cardBundle")
+    @section scripts{
+        @Scripts.Render("~/bundles/cardBundle")
+    }
 </div>
