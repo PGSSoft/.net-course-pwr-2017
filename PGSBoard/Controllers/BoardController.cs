@@ -68,5 +68,20 @@
             int boardId = _boardsService.CreateCart(dto);
             return RedirectToAction("Show", new { SelectedBoardId = boardId });
         }
+
+        //DELETE: Delete card from db and returns if action was successful
+        [HttpDelete]
+        public JsonResult DeleteCard(int cardId)
+        {
+            var deleteCardDto = new DeleteCardDto()
+            {
+                CardId = cardId
+            };
+            var result = _boardsService.DeleteCard(deleteCardDto);
+            return new JsonResult()
+            {
+                Data = result
+            };
+        }
     }
 }

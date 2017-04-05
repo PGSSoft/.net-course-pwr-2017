@@ -73,6 +73,7 @@ namespace PGSBoard.Repositories
                         Name = l.Name,
                         Cards = l.Cards.Select(c => new CardDto
                         {
+                            Id = c.Id,
                             Name = c.Name,
                             Description = c.Description
                         })
@@ -111,6 +112,17 @@ namespace PGSBoard.Repositories
             {
                 db.Cards.Add(card);
                 db.SaveChanges();
+            }
+        }
+
+
+        public int DeleteCard(DeleteCardDto dto)
+        {
+            using (var db = new PGSBoardContext())
+            {
+                var cardToRemove = db.Cards.Single(card => card.Id == dto.CardId);
+                db.Cards.Remove(cardToRemove);
+                return db.SaveChanges() == 1 ? dto.CardId : 0;
             }
         }
     }

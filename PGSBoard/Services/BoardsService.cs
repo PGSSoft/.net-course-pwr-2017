@@ -56,7 +56,7 @@
             List<CardViewModel> cardsViewModels = new List<CardViewModel>();
             foreach (var card in cards)
             {
-                cardsViewModels.Add(new CardViewModel(card.Name, card.Description));
+                cardsViewModels.Add(new CardViewModel(card.Id, card.Name, card.Description));
             }
             return cardsViewModels;
         }
@@ -86,6 +86,11 @@
             var boards = this.boardsRepository.GetBoards();
             var board = boards.Single(x => x.Lists.Select(l => l.Id).Contains(dto.ListId));
             return board.Id;
+        }
+
+        public int DeleteCard(DeleteCardDto dto)
+        {
+            return this.boardsRepository.DeleteCard(dto);
         }
     }
 }
