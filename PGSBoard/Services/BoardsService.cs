@@ -87,5 +87,10 @@
             var board = boards.Single(x => x.Lists.Select(l => l.Id).Contains(dto.ListId));
             return board.Id;
         }
+
+        public int DeleteCard(DeleteCardDto dto)
+        {
+            return this.boardsRepository.DeleteCard(dto);
+        }
     }
 }
