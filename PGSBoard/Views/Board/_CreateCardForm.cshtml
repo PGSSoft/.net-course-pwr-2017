@@ -2,7 +2,7 @@
 
 @*This partial will be injected to show boards view and it is form for creating new card*@
 
-<div class="card card--editor clearfix">
+<div class="card card--editor clearfix hidden-form">
     @using (Html.BeginForm("CreateCard", "Board", FormMethod.Post))
     {
         @Html.HiddenFor(m => m.ListId) @*In hidden html field we put id of list to which card will be added, during creating this dto,
@@ -18,3 +18,4 @@
         </div>
     }
 </div>
+<button class="pull-right btn btn-success">Dodaj karte</button>
