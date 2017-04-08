@@ -29,9 +29,7 @@
             $(event.target).closest(".list").remove();
         }
 
-        function onError(data) {
-
-        }
+        function onError(data) { }
     }
 
     function deleteCard(event) {
@@ -42,8 +40,7 @@
             url: "/Board/DeleteCard",
             success: onSuccess,
             error: onError,
-            data: { cardId: cardId }
-            
+            data: { cardId: cardId }    
         });
 
         function onSuccess(data) {
@@ -54,8 +51,6 @@
             $(event.target).closest(".card").remove();
         }
 
-        function onError(data) {
-
-        }
+        function onError(data) { }
     }
 });
