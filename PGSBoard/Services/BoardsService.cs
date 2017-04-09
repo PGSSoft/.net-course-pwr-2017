@@ -59,7 +59,6 @@
                 cardsViewModels.Add(new CardViewModel(card.Id, card.Name, card.Description, card.PositionCardId));
             }
 
-
             return cardsViewModels.OrderBy(x => x.PositionCardId).ToList();
         }
 
