@@ -151,8 +151,7 @@ namespace PGSBoard.Repositories
                     var cardChangedAutomatically =
                         currentListCard.Single(card => card.PositionCardId == updateCardPositionDto.PositionCard);
 
-                    cardChangedAutomatically.PositionCardId = cardChangedAutomatically.PositionCardId >
-                                                              cardToUpdate.PositionCardId
+                    cardChangedAutomatically.PositionCardId = cardChangedAutomatically.PositionCardId > cardToUpdate.PositionCardId
                         ? cardChangedAutomatically.PositionCardId - 1
                         : cardChangedAutomatically.PositionCardId + 1;
                     cardToUpdate.ListId = updateCardPositionDto.ListId;
@@ -196,10 +195,9 @@ namespace PGSBoard.Repositories
         {
             using (var db = new PGSBoardContext())
             {
-                var cardToDelete = db.Cards.Single(card => card.Id == dto.CardId);
-                var cardToUpdate =
-                    db.Cards.Where(card => card.Id != dto.CardId && card.PositionCardId > cardToDelete.PositionCardId && card.ListId == dto.ListId)
-                        .ToList();
+                var cards = db.Cards.Where(card => card.ListId == dto.ListId || card.Id == dto.CardId).ToList();
+                var cardToDelete = cards.Single(card => card.Id == dto.CardId);
+                var cardToUpdate = cards.Where(card => card.Id != dto.CardId && card.PositionCardId > cardToDelete.PositionCardId).ToList();
 
                 foreach (var card in cardToUpdate)
                 {
