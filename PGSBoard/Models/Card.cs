@@ -14,7 +14,6 @@ namespace PGSBoard.Models
 
         public int ListId { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PositionCardId { get; set; }
 
         public List List { get; set; }
