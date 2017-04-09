@@ -92,7 +92,7 @@
 
         public int DeleteCard(DeleteCardDto dto)
         {
-            this.boardsRepository.ChangePositionCardBeforeDelete(dto);
+            this.boardsRepository.ChangePositionCardBeforeDelete(dto); //this method reduce position of cards which will stay 
             return this.boardsRepository.DeleteCard(dto);
         }
 
