@@ -1,4 +1,6 @@
-﻿namespace PGSBoard.Controllers
+﻿using System.Net;
+
+namespace PGSBoard.Controllers
 {
     using System.Web.Mvc;
 
@@ -71,11 +73,12 @@
 
         //DELETE: Delete card from db and returns if action was successful
         [HttpDelete]
-        public JsonResult DeleteCard(int cardId)
+        public JsonResult DeleteCard(int cardId, int listId)
         {
             var deleteCardDto = new DeleteCardDto()
             {
-                CardId = cardId
+                CardId = cardId, 
+                ListId = listId
             };
             var result = _boardsService.DeleteCard(deleteCardDto);
             return new JsonResult()
@@ -83,5 +86,38 @@
                 Data = result
             };
         }
+
+        [HttpDelete]
+        public JsonResult DeleteList(int listId)
+        {
+            var deleteListDto = new DeleteListDto()
+            {
+                ListId = listId
+            };
+
+            var result = _boardsService.DeleteList(deleteListDto);
+            return new JsonResult()
+            {
+                Data = result
+            };
+        }
+
+        [HttpPost]
+        public ActionResult UpdateCardPosition(int cardId, int listId, int positionCard, int oldListId)
+        {
+            var updateCardPositionDto = new UpdateCardPositionDto()
+            {
+                ListId = listId,
+                CardId = cardId, 
+                PositionCard = positionCard,
+                OldListId = oldListId
+            };
+
+            _boardsService.UpdateCardPosition(updateCardPositionDto);
+
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
+
+        }
+
     }
 }

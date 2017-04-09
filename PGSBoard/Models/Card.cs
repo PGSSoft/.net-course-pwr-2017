@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PGSBoard.Models
 {
@@ -12,6 +13,8 @@ namespace PGSBoard.Models
         public string Description { get; set; }
 
         public int ListId { get; set; }
+
+        public int PositionCardId { get; set; }
 
         public List List { get; set; }
     }

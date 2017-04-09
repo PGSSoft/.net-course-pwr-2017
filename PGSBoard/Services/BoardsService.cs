@@ -56,9 +56,10 @@
             List<CardViewModel> cardsViewModels = new List<CardViewModel>();
             foreach (var card in cards)
             {
-                cardsViewModels.Add(new CardViewModel(card.Id, card.Name, card.Description));
+                cardsViewModels.Add(new CardViewModel(card.Id, card.Name, card.Description, card.PositionCardId));
             }
-            return cardsViewModels;
+
+            return cardsViewModels.OrderBy(x => x.PositionCardId).ToList();
         }
 
         private List<ListViewModel> MapListsToListViewModels(List<ListDto> lists)  //This method maps lists to ListViewModels
@@ -67,7 +68,7 @@
             foreach (var list in lists)
             {
                 listViewModels.Add(new ListViewModel(list.Name, MapCardsToCardViewModels(list.Cards.ToList()),  //Map cards which belongs to list to CardViewModels
-                    new CreateCardDto(list.Id))); // Create CreateCardDto for from to creating new card and pass there list id
+                    new CreateCardDto(list.Id), list.Id)); // Create CreateCardDto for from to creating new card and pass there list id
             }
             return listViewModels;
         }
@@ -81,6 +82,7 @@
         //Method for creatin new list
         public int CreateCart(CreateCardDto dto)
         {
+            dto.ListLength = this.boardsRepository.ListLength(dto.ListId);
             this.boardsRepository.AddCard(dto);
 
             var boards = this.boardsRepository.GetBoards();
@@ -90,7 +92,18 @@
 
         public int DeleteCard(DeleteCardDto dto)
         {
+            this.boardsRepository.ChangePositionCardBeforeDelete(dto); //this method reduce position of cards which will stay 
             return this.boardsRepository.DeleteCard(dto);
+        }
+
+        public int DeleteList(DeleteListDto deleteListDto)
+        {
+            return this.boardsRepository.DeleteList(deleteListDto);
+        }
+
+        public void UpdateCardPosition(UpdateCardPositionDto updateCardPositionDto)
+        {
+            this.boardsRepository.UpdateCardPosition(updateCardPositionDto);
         }
     }
 }

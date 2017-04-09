@@ -137,13 +137,19 @@
     <Compile Include="Dtos\CreateCardDto.cs" />
     <Compile Include="Dtos\CreateListDto.cs" />
     <Compile Include="Dtos\DeleteCardDto.cs" />
+    <Compile Include="Dtos\DeleteListDto.cs" />
     <Compile Include="Dtos\ListDto.cs" />
+    <Compile Include="Dtos\UpdateCardPositionDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201703271951217_InitialCreate.cs" />
     <Compile Include="Migrations\201703271951217_InitialCreate.Designer.cs">
       <DependentUpon>201703271951217_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704091036043_AddPositionCard.cs" />
+    <Compile Include="Migrations\201704091036043_AddPositionCard.Designer.cs">
+      <DependentUpon>201704091036043_AddPositionCard.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Board.cs" />
@@ -161,6 +167,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jquery-ui.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -172,6 +179,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -216,6 +224,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201703271951217_InitialCreate.resx">
       <DependentUpon>201703271951217_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704091036043_AddPositionCard.resx">
+      <DependentUpon>201704091036043_AddPositionCard.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
