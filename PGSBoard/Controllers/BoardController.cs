@@ -83,5 +83,20 @@
                 Data = result
             };
         }
+
+        [HttpDelete]
+        public JsonResult DeleteList(int listId)
+        {
+            var deleteListDto = new DeleteListDto()
+            {
+                ListId = listId
+            };
+
+            var result = _boardsService.DeleteList(deleteListDto);
+            return new JsonResult()
+            {
+                Data = result
+            };
+        }
     }
 }
