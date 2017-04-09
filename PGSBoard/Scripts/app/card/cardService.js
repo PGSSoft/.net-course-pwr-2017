@@ -2,6 +2,9 @@
     $('.card').on('click', '.card__remove-card-btn', deleteCard);
     $('button').on('click', showForm);
     $('.list').on('click', '.list__remove-list-btn', deleteList);
+    $('.list__cards-container').sortable({
+        connectWith: ".list__cards-container"
+    });
 
     function showForm(event) {
         event.stopPropagation();
