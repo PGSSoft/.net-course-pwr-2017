@@ -100,5 +100,18 @@ namespace PGSBoard.Controllers
                 Data = result
             };
         }
+
+        [HttpPost]
+        public ActionResult UpdateListCard(int cardId, int listId)
+        {
+            var updateListCardDto = new UpdateListCardDto()
+            {
+                CardId = cardId,
+                ListId = listId
+            };
+
+            this._boardsService.UpdateListCard(updateListCardDto);
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
     }
 }

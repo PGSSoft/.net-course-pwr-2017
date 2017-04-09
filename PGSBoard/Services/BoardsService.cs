@@ -97,5 +97,10 @@
         {
             return this.boardsRepository.DeleteList(deleteListDto);
         }
+
+        public void UpdateListCard(UpdateListCardDto updateListCardDto)
+        {
+            this.boardsRepository.UpdateListCard(updateListCardDto);
+        }
     }
 }
