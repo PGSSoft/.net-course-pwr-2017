@@ -97,5 +97,10 @@
         {
             return this.boardsRepository.DeleteList(deleteListDto);
         }
+
+        public void UpdateCardPosition(UpdateCardPositionDto updateCardPositionDto)
+        {
+            this.boardsRepository.UpdateCardPosition(updateCardPositionDto);
+        }
     }
 }

@@ -13,6 +13,8 @@ namespace PGSBoard.Models
 
         public int ListId { get; set; }
 
+        public int PositionCardId { get; set; }
+
         public List List { get; set; }
     }
 }

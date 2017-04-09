@@ -1,4 +1,6 @@
-﻿namespace PGSBoard.Controllers
+﻿using System.Net;
+
+namespace PGSBoard.Controllers
 {
     using System.Web.Mvc;
 
@@ -98,5 +100,22 @@
                 Data = result
             };
         }
+
+        [HttpPost]
+        public ActionResult UpdateCardPosition(int cardId, int listId, int positionCard)
+        {
+            var updateCardPositionDto = new UpdateCardPositionDto()
+            {
+                ListId = listId,
+                CardId = cardId, 
+                PositionCard = positionCard
+            };
+
+            _boardsService.UpdateCardPosition(updateCardPositionDto);
+
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
+
+        }
+
     }
 }

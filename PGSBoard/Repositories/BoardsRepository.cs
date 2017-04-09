@@ -135,5 +135,15 @@ namespace PGSBoard.Repositories
                 return db.SaveChanges() == 1 ? deleteListDto.ListId : 0;
             }
         }
+
+        public void UpdateCardPosition(UpdateCardPositionDto updateCardPositionDto)
+        {
+            using (var db = new PGSBoardContext())
+            {
+                var cardToUpdate = db.Cards.Single(card => card.Id == updateCardPositionDto.CardId);
+                cardToUpdate.ListId = updateCardPositionDto.ListId;
+                db.SaveChanges();
+            }
+        }
     }
 }

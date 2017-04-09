@@ -2,6 +2,22 @@
     $('.card').on('click', '.card__remove-card-btn', deleteCard);
     $('button').on('click', showForm);
     $('.list').on('click', '.list__remove-list-btn', deleteList);
+    $('.list__cards-container').sortable({
+        connectWith: ".list__cards-container",
+        update: updateCardPosition
+    });
+
+    function updateCardPosition(event, ui) {
+        var listId = $(this).closest(".list").data("list-id");
+        var cardId = ui.item.find(".card__remove-card-btn").data("card-id");
+        var positionCard = ui.item.index();
+
+        $.ajax({
+            method: "POST",
+            url: "/Board/UpdateCardPosition",
+            data: { listId: listId, cardId: cardId, positionCard: positionCard }
+        });
+    }
 
     function showForm(event) {
         event.stopPropagation();
