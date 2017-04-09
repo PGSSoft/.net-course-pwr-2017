@@ -1,4 +1,6 @@
-﻿namespace PGSBoard.Controllers
+﻿using System.Net;
+
+namespace PGSBoard.Controllers
 {
     using System.Web.Mvc;
 
@@ -78,6 +80,21 @@
                 CardId = cardId
             };
             var result = _boardsService.DeleteCard(deleteCardDto);
+            return new JsonResult()
+            {
+                Data = result
+            };
+        }
+
+        [HttpDelete]
+        public JsonResult DeleteList(int listId)
+        {
+            var deleteListDto = new DeleteListDto()
+            {
+                ListId = listId
+            };
+
+            var result = _boardsService.DeleteList(deleteListDto);
             return new JsonResult()
             {
                 Data = result

@@ -18,7 +18,7 @@
                 <!--LIST-->
                 @foreach (var list in Model.Lists)  //Iterate all lists in board and display it
                 {
-                    <section class="list">
+                    <section data-list-id="@list.Id" class="list">
                         <header class="list__header clearfix">
                             <h4 class="pull-left">@list.Name</h4> @*Display list name*@
                             <i class="fa fa-trash-o trash pull-right list__remove-list-btn"></i>
