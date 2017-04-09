@@ -73,11 +73,12 @@ namespace PGSBoard.Controllers
 
         //DELETE: Delete card from db and returns if action was successful
         [HttpDelete]
-        public JsonResult DeleteCard(int cardId)
+        public JsonResult DeleteCard(int cardId, int listId)
         {
             var deleteCardDto = new DeleteCardDto()
             {
-                CardId = cardId
+                CardId = cardId, 
+                ListId = listId
             };
             var result = _boardsService.DeleteCard(deleteCardDto);
             return new JsonResult()

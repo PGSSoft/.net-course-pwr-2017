@@ -69,7 +69,7 @@
             foreach (var list in lists)
             {
                 listViewModels.Add(new ListViewModel(list.Name, MapCardsToCardViewModels(list.Cards.ToList()),  //Map cards which belongs to list to CardViewModels
-                    new CreateCardDto(list.Id),list.Id)); // Create CreateCardDto for from to creating new card and pass there list id
+                    new CreateCardDto(list.Id), list.Id)); // Create CreateCardDto for from to creating new card and pass there list id
             }
             return listViewModels;
         }
@@ -83,6 +83,7 @@
         //Method for creatin new list
         public int CreateCart(CreateCardDto dto)
         {
+            dto.ListLength = this.boardsRepository.ListLength(dto.ListId);
             this.boardsRepository.AddCard(dto);
 
             var boards = this.boardsRepository.GetBoards();
@@ -92,6 +93,7 @@
 
         public int DeleteCard(DeleteCardDto dto)
         {
+            this.boardsRepository.ChangePositionCardBeforeDelete(dto);
             return this.boardsRepository.DeleteCard(dto);
         }
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Ajax.Utilities;
 using PGSBoard.Dtos;
+using WebGrease.Css.Extensions;
 
 namespace PGSBoard.Repositories
 {
@@ -107,7 +108,8 @@ namespace PGSBoard.Repositories
             {
                 Name = dto.Name,
                 Description = dto.Description,
-                ListId = dto.ListId
+                ListId = dto.ListId,
+                PositionCardId = dto.ListLength > 0 ? dto.ListLength : 0
             };
 
             using (var db = new PGSBoardContext())
@@ -178,6 +180,32 @@ namespace PGSBoard.Repositories
 
                     db.SaveChanges();
                 }
+            }
+        }
+
+        public int ListLength(int listId)
+        {
+            using (var db = new PGSBoardContext())
+            {
+                var listLength = db.Cards.Count(card => card.ListId == listId);
+                return listLength;
+            }
+        }
+
+        public void ChangePositionCardBeforeDelete(DeleteCardDto dto)
+        {
+            using (var db = new PGSBoardContext())
+            {
+                var cardToDelete = db.Cards.Single(card => card.Id == dto.CardId);
+                var cardToUpdate =
+                    db.Cards.Where(card => card.Id != dto.CardId && card.PositionCardId > cardToDelete.PositionCardId && card.ListId == dto.ListId)
+                        .ToList();
+
+                foreach (var card in cardToUpdate)
+                {
+                    card.PositionCardId = card.PositionCardId - 1;
+                }
+                db.SaveChanges();
             }
         }
     }
