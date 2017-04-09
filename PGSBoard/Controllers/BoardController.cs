@@ -1,4 +1,6 @@
-﻿namespace PGSBoard.Controllers
+﻿using System.Net;
+
+namespace PGSBoard.Controllers
 {
     using System.Web.Mvc;
 

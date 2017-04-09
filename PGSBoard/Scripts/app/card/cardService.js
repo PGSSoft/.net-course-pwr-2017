@@ -3,8 +3,20 @@
     $('button').on('click', showForm);
     $('.list').on('click', '.list__remove-list-btn', deleteList);
     $('.list__cards-container').sortable({
-        connectWith: ".list__cards-container"
+        connectWith: ".list__cards-container",
+        receive: updateListCard
     });
+
+    function updateListCard(event, ui) {
+        var cardId = ui.item.find(".card__remove-card-btn").data("card-id");
+        var listId = ui.item.closest(".list").data("list-id");
+
+        $.ajax({
+            method: "POST",
+            url: "/Board/UpdateListCard",
+            data: { cardId: cardId, listId: listId }
+        });
+    }
 
     function showForm(event) {
         event.stopPropagation();
