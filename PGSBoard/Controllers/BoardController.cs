@@ -102,13 +102,14 @@ namespace PGSBoard.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateCardPosition(int cardId, int listId, int positionCard)
+        public ActionResult UpdateCardPosition(int cardId, int listId, int positionCard, int oldListId)
         {
             var updateCardPositionDto = new UpdateCardPositionDto()
             {
                 ListId = listId,
                 CardId = cardId, 
-                PositionCard = positionCard
+                PositionCard = positionCard,
+                OldListId = oldListId
             };
 
             _boardsService.UpdateCardPosition(updateCardPositionDto);

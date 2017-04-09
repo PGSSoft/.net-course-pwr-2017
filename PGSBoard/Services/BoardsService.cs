@@ -56,9 +56,11 @@
             List<CardViewModel> cardsViewModels = new List<CardViewModel>();
             foreach (var card in cards)
             {
-                cardsViewModels.Add(new CardViewModel(card.Id, card.Name, card.Description));
+                cardsViewModels.Add(new CardViewModel(card.Id, card.Name, card.Description, card.PositionCardId));
             }
-            return cardsViewModels;
+
+
+            return cardsViewModels.OrderBy(x => x.PositionCardId).ToList();
         }
 
         private List<ListViewModel> MapListsToListViewModels(List<ListDto> lists)  //This method maps lists to ListViewModels

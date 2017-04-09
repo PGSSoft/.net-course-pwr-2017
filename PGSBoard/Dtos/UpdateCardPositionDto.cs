@@ -10,5 +10,7 @@ namespace PGSBoard.Dtos
         public int CardId { get; set; }
         public int ListId { get; set; }
         public int PositionCard { get; set; }
+
+        public int OldListId { get; set; }
     }
 }

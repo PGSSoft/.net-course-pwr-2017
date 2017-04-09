@@ -2,6 +2,7 @@
 using PGSBoard.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Ajax.Utilities;
 using PGSBoard.Dtos;
 
 namespace PGSBoard.Repositories
@@ -10,7 +11,7 @@ namespace PGSBoard.Repositories
     {
         public IEnumerable<BoardDto> GetBoards()
         {
-            using(var db = new PGSBoardContext())
+            using (var db = new PGSBoardContext())
             {
                 var boards = db.Boards
                     .Include("Lists.Cards")
@@ -46,7 +47,7 @@ namespace PGSBoard.Repositories
                 Description = dto.Description
             };
 
-            using(var db = new PGSBoardContext())
+            using (var db = new PGSBoardContext())
             {
                 db.Boards.Add(board);
                 db.SaveChanges();
@@ -55,7 +56,7 @@ namespace PGSBoard.Repositories
 
         public BoardDto GetBoard(int boardId)
         {
-            using(var db = new PGSBoardContext())
+            using (var db = new PGSBoardContext())
             {
                 var board = db.Boards
                     .Include("Lists.Cards")
@@ -75,7 +76,8 @@ namespace PGSBoard.Repositories
                         {
                             Id = c.Id,
                             Name = c.Name,
-                            Description = c.Description
+                            Description = c.Description,
+                            PositionCardId = c.PositionCardId
                         })
                     })
                 };
@@ -140,9 +142,42 @@ namespace PGSBoard.Repositories
         {
             using (var db = new PGSBoardContext())
             {
-                var cardToUpdate = db.Cards.Single(card => card.Id == updateCardPositionDto.CardId);
-                cardToUpdate.ListId = updateCardPositionDto.ListId;
-                db.SaveChanges();
+                if (updateCardPositionDto.ListId == updateCardPositionDto.OldListId)
+                {
+                    var currentListCard = db.Cards.Where(card => card.ListId == updateCardPositionDto.ListId).ToList();
+                    var cardToUpdate = currentListCard.Single(card => card.Id == updateCardPositionDto.CardId);
+                    var cardChangedAutomatically =
+                        currentListCard.Single(card => card.PositionCardId == updateCardPositionDto.PositionCard);
+
+                    cardChangedAutomatically.PositionCardId = cardChangedAutomatically.PositionCardId >
+                                                              cardToUpdate.PositionCardId
+                        ? cardChangedAutomatically.PositionCardId - 1
+                        : cardChangedAutomatically.PositionCardId + 1;
+                    cardToUpdate.ListId = updateCardPositionDto.ListId;
+                    cardToUpdate.PositionCardId = updateCardPositionDto.PositionCard;
+                    db.SaveChanges();
+
+                }
+                else
+                {
+                    var cards = db.Cards.Where(card => card.ListId == updateCardPositionDto.ListId || card.ListId == updateCardPositionDto.OldListId).ToList();
+                    var cardToUpdate = cards.Single(card => card.Id == updateCardPositionDto.CardId);
+                    var prevCardsList = cards.Where(card => card.ListId == updateCardPositionDto.OldListId && card.PositionCardId > cardToUpdate.PositionCardId && card.Id != updateCardPositionDto.CardId).ToList();
+                    var nextCardsList = cards.Where(card => card.ListId == updateCardPositionDto.ListId && card.PositionCardId >= updateCardPositionDto.PositionCard).ToList();
+                    foreach (var prevCard in prevCardsList)
+                    {
+                        prevCard.PositionCardId = prevCard.PositionCardId - 1;
+                    }
+
+                    foreach (var nextCard in nextCardsList)
+                    {
+                        nextCard.PositionCardId = nextCard.PositionCardId + 1;
+                    }
+                    cardToUpdate.ListId = updateCardPositionDto.ListId;
+                    cardToUpdate.PositionCardId = updateCardPositionDto.PositionCard;
+
+                    db.SaveChanges();
+                }
             }
         }
     }
