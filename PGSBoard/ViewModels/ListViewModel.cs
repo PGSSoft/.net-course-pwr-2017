@@ -7,14 +7,16 @@ namespace PGSBoard.ViewModels
 
     public class ListViewModel
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public List<CardViewModel> Cards { get; set; }
         public CreateCardDto CreateCardDto { get; set; }
-        public ListViewModel(string name, List<CardViewModel> cards, CreateCardDto createCardDto)
+        public ListViewModel(string name, List<CardViewModel> cards, CreateCardDto createCardDto, int id)
         {
             Name = name;
             Cards = cards;
             CreateCardDto = createCardDto;
+            Id = id;
         }
     }
 }

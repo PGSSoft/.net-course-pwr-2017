@@ -125,5 +125,26 @@ namespace PGSBoard.Repositories
                 return db.SaveChanges() == 1 ? dto.CardId : 0;
             }
         }
+
+        public int DeleteList(DeleteListDto deleteListDto)
+        {
+            using (var db = new PGSBoardContext())
+            {
+                var listToRemove = db.Lists.Single(list => list.Id == deleteListDto.ListId);
+                db.Lists.Remove((listToRemove));
+                return db.SaveChanges() == 1 ? deleteListDto.ListId : 0;
+            }
+        }
+
+        public void UpdateListCard(UpdateListCardDto updateListCardDto)
+        {
+            using (var db = new PGSBoardContext())
+            {
+                var cardToUpdate =
+                    db.Cards.Single(cart => cart.Id == updateListCardDto.CardId);
+                cardToUpdate.ListId = updateListCardDto.ListId;
+                db.SaveChanges();
+            }
+        }
     }
 }

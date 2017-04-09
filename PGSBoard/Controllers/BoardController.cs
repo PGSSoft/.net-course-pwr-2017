@@ -1,4 +1,6 @@
-﻿namespace PGSBoard.Controllers
+﻿using System.Net;
+
+namespace PGSBoard.Controllers
 {
     using System.Web.Mvc;
 
@@ -82,6 +84,34 @@
             {
                 Data = result
             };
+        }
+
+        [HttpDelete]
+        public JsonResult DeleteList(int listId)
+        {
+            var deleteListDto = new DeleteListDto()
+            {
+                ListId = listId
+            };
+
+            var result = _boardsService.DeleteList(deleteListDto);
+            return new JsonResult()
+            {
+                Data = result
+            };
+        }
+
+        [HttpPost]
+        public ActionResult UpdateListCard(int cardId, int listId)
+        {
+            var updateListCardDto = new UpdateListCardDto()
+            {
+                CardId = cardId,
+                ListId = listId
+            };
+
+            this._boardsService.UpdateListCard(updateListCardDto);
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
     }
 }
